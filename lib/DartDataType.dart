@@ -1,0 +1,217 @@
+import 'package:flutter/material.dart';
+import 'dart:io';
+
+class FlutterDartColumn extends StatelessWidget {
+  const FlutterDartColumn({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,brightness: Brightness.light,),
+      ),
+      home: Platform.isIOS ? const DartRow(title: 'Learn Flutter Row') : const DartColumn(title: 'Learn Flutter Column'),
+    );
+  }
+}
+
+class DartColumn extends StatefulWidget {
+const DartColumn({super.key, required this.title});
+
+// This widget is the home page of your application. It is stateful, meaning
+// that it has a State object (defined below) that contains fields that affect
+// how it looks.
+
+// This class is the configuration for the state. It holds the values (in this
+// case the title) provided by the parent (in this case the App widget) and
+// used by the build method of the State. Fields in a Widget subclass are
+// always marked "final".
+
+final String title;
+
+@override
+State<DartColumn> createState() => _DartColumnState();
+}
+
+class _DartColumnState extends State<DartColumn> {
+
+
+@override
+Widget build(BuildContext context) {
+// This method is rerun every time setState is called, for instance as done
+// by the _incrementCounter method above.
+//
+// The Flutter framework has been optimized to make rerunning build methods
+// fast, so that you can just rebuild anything that needs updating rather
+// than having to individually change instances of widgets.
+return Scaffold(
+appBar: AppBar(
+// TRY THIS: Try changing the color here to a specific color (to
+// Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+// change color while the other colors stay the same.
+backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+// Here we take the value from the MyHomePage object that was created by
+// the App.build method, and use it to set our appbar title.
+title: Text(widget.title),
+  // centerTitle: Theme.of(context).platform == TargetPlatform.iOS,
+  centerTitle: true,
+),
+body: Center(
+// Center is a layout widget. It takes a single child and positions it
+// in the middle of the parent.
+    child: Container(//Height and Width will cover all the space they get until their parent border
+      // height: double.infinity,
+      // width: double.infinity,
+      color : Platform.isIOS ? Colors.purple : Colors.pink,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+
+          Container(
+            height: 50.0,
+            width: 50.0,
+            color : Colors.red,
+            margin: EdgeInsetsGeometry.all(20.0),
+          ),
+        Container(
+          height: 50.0,
+          width: 50.0,
+            color : Colors.red,
+            margin: EdgeInsetsGeometry.all(20.0),
+    ),
+        Container(
+          height: 50.0,
+          width: 50.0,
+            color : Colors.red,
+            margin: EdgeInsetsGeometry.all(20.0),
+),
+        Container(
+          height: 50.0,
+          width: 50.0,
+            color : Colors.red,
+            margin: EdgeInsetsGeometry.all(20.0),
+)
+
+
+      ],
+      )
+    ),
+), // This trailing comma makes auto-formatting nicer for build methods.
+);
+}
+}
+
+class DartRow extends StatefulWidget {
+  const DartRow({super.key, required this.title});
+
+// This widget is the home page of your application. It is stateful, meaning
+// that it has a State object (defined below) that contains fields that affect
+// how it looks.
+
+// This class is the configuration for the state. It holds the values (in this
+// case the title) provided by the parent (in this case the App widget) and
+// used by the build method of the State. Fields in a Widget subclass are
+// always marked "final".
+
+  final String title;
+
+  @override
+  State<DartRow> createState() => _DartRowState();
+}
+
+class _DartRowState extends State<DartRow> {
+
+
+  @override
+  Widget build(BuildContext context) {
+// This method is rerun every time setState is called, for instance as done
+// by the _incrementCounter method above.
+//
+// The Flutter framework has been optimized to make rerunning build methods
+// fast, so that you can just rebuild anything that needs updating rather
+// than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+// TRY THIS: Try changing the color here to a specific color (to
+// Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+// change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+// Here we take the value from the MyHomePage object that was created by
+// the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+        // centerTitle: Theme.of(context).platform == TargetPlatform.iOS,
+        centerTitle: true,
+      ),
+      body: Center(
+// Center is a layout widget. It takes a single child and positions it
+// in the middle of the parent.
+        child: Container(//Height and Width will cover all the space they get until their parent border
+          // height: double.infinity,
+          // width: double.infinity,
+            color : Platform.isIOS ? Colors.purple : Colors.pink,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+
+                Container(
+                  height: 50.0,
+                  width: 50.0,
+                  color : Colors.red,
+                  margin: EdgeInsetsGeometry.all(20.0),
+                  child: Center(child: Text("A"),),
+                ),
+                Container(
+                  height: 50.0,
+                  width: 50.0,
+                  color : Colors.red,
+                  margin: EdgeInsetsGeometry.all(20.0),
+                  child: Image.network(//Used to get and show Image from URL
+                   "https://images.unsplash.com/photo-1690321608227-df2b9cf50821?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0",
+                  height: double.infinity,
+                  width: double.infinity,),
+                ),
+                Container(
+                  height: 50.0,
+                  width: 50.0,
+                  color : Colors.red,
+                  margin: EdgeInsetsGeometry.all(20.0),
+                  child: Center(child: Text("C"),),
+                ),
+                Container(
+                  height: 50.0,
+                  width: 50.0,
+                  color : Colors.red,
+                  margin: EdgeInsetsGeometry.all(20.0),
+                  child: Center(child: Text("D"),),
+                )
+
+
+              ],
+            )
+        ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
