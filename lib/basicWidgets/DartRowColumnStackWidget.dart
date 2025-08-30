@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class FlutterDartColumn extends StatelessWidget {
-  const FlutterDartColumn({super.key});
+class FlutterDartRowColumn extends StatelessWidget {
+  const FlutterDartRowColumn({super.key});
 
   // This widget is the root of your application.
   @override
@@ -28,7 +28,7 @@ class FlutterDartColumn extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,brightness: Brightness.light,),
       ),
-      home: Platform.isIOS ? const DartRow(title: 'Learn Flutter Row') : const DartColumn(title: 'Learn Flutter Column'),
+      home: Platform.isIOS ? const DartRow(title: 'Learn Flutter Row') : const DartStack(title: 'Learn Flutter Stack'),
     );
   }
 }
@@ -92,7 +92,7 @@ body: Center(
             width: 50.0,
             color : Colors.red,
             margin: EdgeInsetsGeometry.all(20.0),
-          ),
+             ),
         Container(
           height: 50.0,
           width: 50.0,
@@ -180,16 +180,21 @@ class _DartRowState extends State<DartRow> {
                   width: 50.0,
                   color : Colors.red,
                   margin: EdgeInsetsGeometry.all(20.0),
-                  child: Center(child: Text("A"),),
                 ),
                 Container(
                   height: 50.0,
                   width: 50.0,
                   color : Colors.red,
                   margin: EdgeInsetsGeometry.all(20.0),
-                  child: Image.network(//Used to get and show Image from URL
-                   "https://images.unsplash.com/photo-1690321608227-df2b9cf50821?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0",
-                  height: double.infinity,
+                  // child: Image(
+                  //   image: NetworkImage(//Used to get and show Image from URL
+                  //  "https://images.unsplash.com/photo-1690321608227-df2b9cf50821?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0"
+                  //   ),
+
+                    child: Image.network(//Used to get and show Image from URL
+                      "https://images.unsplash.com/photo-1690321608227-df2b9cf50821?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0",
+
+                      height: double.infinity,
                   width: double.infinity,),
                 ),
                 Container(
@@ -215,3 +220,95 @@ class _DartRowState extends State<DartRow> {
     );
   }
 }
+
+
+class DartStack extends StatefulWidget {
+  const DartStack({super.key, required this.title});
+
+// This widget is the home page of your application. It is stateful, meaning
+// that it has a State object (defined below) that contains fields that affect
+// how it looks.
+
+// This class is the configuration for the state. It holds the values (in this
+// case the title) provided by the parent (in this case the App widget) and
+// used by the build method of the State. Fields in a Widget subclass are
+// always marked "final".
+
+  final String title;
+
+  @override
+  State<DartStack> createState() => _DartStackState();
+}
+
+class _DartStackState extends State<DartStack> {
+
+
+  @override
+  Widget build(BuildContext context) {
+// This method is rerun every time setState is called, for instance as done
+// by the _incrementCounter method above.
+//
+// The Flutter framework has been optimized to make rerunning build methods
+// fast, so that you can just rebuild anything that needs updating rather
+// than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+// TRY THIS: Try changing the color here to a specific color (to
+// Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+// change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+// Here we take the value from the MyHomePage object that was created by
+// the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+        // centerTitle: Theme.of(context).platform == TargetPlatform.iOS,
+        centerTitle: true,
+      ),
+      body: Center(
+// Center is a layout widget. It takes a single child and positions it
+// in the middle of the parent.
+        child: Container(//Height and Width will cover all the space they get until their parent border
+          // height: double.infinity,
+          // width: double.infinity,
+            color : Platform.isIOS ? Colors.purple : Colors.pink,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color : Colors.blue,
+                  margin: EdgeInsetsGeometry.all(0.0),
+                ),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color : Colors.red,
+                  margin: EdgeInsetsGeometry.all(30.0),
+                ),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color : Colors.pink,
+                  margin: EdgeInsetsGeometry.all(50.0),
+                ),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color : Colors.yellow,
+                  margin: EdgeInsetsGeometry.all(70.0),
+                  child: Image.network(//Used to get and show Image from URL
+                    "https://images.unsplash.com/photo-1690321608227-df2b9cf50821?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0",
+
+                  ),
+                )
+
+
+              ],
+            )
+        ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
