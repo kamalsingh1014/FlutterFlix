@@ -33,7 +33,7 @@ class RoutingWidget extends StatelessWidget {
 void switchToLogin(BuildContext context) async{
   await Future.delayed(Duration(seconds: 5));
   print("Ready for login");
-  Navigator.pushReplacementNamed(context, '/login');
+  Navigator.pushNamed(context, '/login');
 }
 
 class LoadingRouting extends StatefulWidget {
@@ -49,12 +49,12 @@ class _LoadingRoutingState extends State<LoadingRouting> {
   void initState() {
     super.initState();
     print("InitState Loading called ");
+    switchToLogin(context);
   }
 
   @override
   Widget build(BuildContext context) {
     print("Build Loading called ");
-    switchToLogin(context);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.purple[900],
@@ -401,7 +401,9 @@ class _HomeRoutingState extends State<HomeRouting> {
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             print("Home Floating Button");
-            Navigator.pushReplacementNamed(context, '/dashboard');
+            Navigator.of(context).push(_createAnimationRoute());
+
+            // Navigator.pushReplacementNamed(context, '/dashboard');
           },
           child: Icon(
             Icons.dashboard,
@@ -412,6 +414,24 @@ class _HomeRoutingState extends State<HomeRouting> {
   }
 }
 
+Route<void> _createAnimationRoute(){
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const DashboardRouting(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      final tween = Tween(begin: begin, end: end);
+      final curvedAnimation = CurvedAnimation(parent: animation, curve: curve);
+
+      return SlideTransition(
+        position: tween.animate(curvedAnimation),
+        child: child,
+      );
+    },
+  );
+}
 
 class DashboardRouting extends StatefulWidget {
   const DashboardRouting({super.key});

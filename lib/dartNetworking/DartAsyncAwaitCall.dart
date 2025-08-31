@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'ModelNetworkCall.dart';
+
 
 Future<void> callFlutterNotes() async {
 
@@ -36,37 +38,57 @@ class MyFlutLab extends StatefulWidget {
   State<MyFlutLab> createState() => _MyFlutLabState();
 }
 
-class _MyFlutLabState extends State<MyFlutLab> {
-  String name = 'Loading';
-  void callFlutterTodo() async{
-    Response response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'),
-      headers: {
+Future<List<User>> callFlutterTodo() async{
+  Response response = await http.get(Uri.parse(
+      'https://jsonplaceholder.typicode.com/users'),
+    headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36', // A common browser User-Agent
       'Accept': 'application/json', // Good practice to specify what you accept
-      },
+    },
 
-    );
-    print("Api status code  : ${response.statusCode}");
-    print("Api response : ${response.body}");
-    List<dynamic> data = jsonDecode(response.body);
-    if(data.isNotEmpty){
-      for(int i = 0;i<data.length;i++) {
-        print("  Api Json Object :  ${data[i]}");
+  );
+  print("Api status code  : ${response.statusCode}");
+  print("Api response : ${response.body}");
+  if(response.statusCode == 200){
+    try{
+      List<User> userList = parseUsers(response.body);
+      for (User user in userList) {
+        print('User ID: ${user.id}, Name: ${user.name}, City: ${user.address.city}');
       }
-      Map mapJsonObject = data[0];
-      setState(() {
-       name = mapJsonObject['name'];
-      });
+      return userList;
+
+    }catch(e){
+      print(" Parsing fail exception : $e");
+        throw Exception("Api Parsing Fail");
     }
-   // Add extra hours to current time
-    DateTime dateTime =DateTime.parse("2025-08-31 12:10:20");
-    print("Date and Time before addig extra time : ${dateTime}");
-    dateTime = dateTime.add(Duration(hours: 2));
-    print("Date and Time before after extra time : ${dateTime}");
-    print("Date format changed : ${DateFormat.jm().format(dateTime)}");
-
-
+  }else{
+      throw Exception("Api Fail");
   }
+
+  // Now you have a List of User objects
+
+  // List<dynamic> data = jsonDecode(response.body);
+  // if(data.isNotEmpty){
+  //   for(int i = 0;i<data.length;i++) {
+  //     print("  Api Json Object :  ${data[i]}");
+  //   }
+  //   Map mapJsonObject = data[0];
+  //   setState(() {
+  //    name = mapJsonObject['name'];
+  //   });
+  // }
+  // Add extra hours to current time
+  //  DateTime dateTime =DateTime.parse("2025-08-31 12:10:20");
+  //  print("Date and Time before adding extra time : ${dateTime}");
+  //  dateTime = dateTime.add(Duration(hours: 2));
+  //  print("Date and Time after adding extra time : ${dateTime}");
+  //  print("Date format changed : ${DateFormat.jm().format(dateTime)}");
+
+
+}
+
+class _MyFlutLabState extends State<MyFlutLab> {
+  String name = 'Loading';
 
   @override
   void initState() {
