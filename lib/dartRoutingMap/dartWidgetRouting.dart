@@ -43,18 +43,23 @@ class LoadingRouting extends StatefulWidget {
   State<LoadingRouting> createState() => _LoadingRoutingState();
 }
 
-class _LoadingRoutingState extends State<LoadingRouting> {
+class _LoadingRoutingState extends State<LoadingRouting>{
 
   @override
   void initState() {
     super.initState();
     print("InitState Loading called ");
-    switchToLogin(context);
+    // switchToLogin(context);
   }
 
+
+  
+  
   @override
   Widget build(BuildContext context) {
     print("Build Loading called ");
+    switchToLogin(context);
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.purple[900],
@@ -350,7 +355,11 @@ class _LoginRoutingState extends State<LoginRouting> {
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             print("Login Floating Button");
-            Navigator.pushReplacementNamed(context, '/home',
+            // Navigator.pushReplacementNamed(context, '/home',
+            //     arguments: {
+            //       'name':'Kamal'
+            //     });
+            Navigator.pushNamed(context, '/home',
                 arguments: {
                   'name':'Kamal'
                 });
@@ -401,9 +410,11 @@ class _HomeRoutingState extends State<HomeRouting> {
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             print("Home Floating Button");
-            Navigator.of(context).push(_createAnimationRoute());
+            // Navigator.of(context).push(_createAnimationRoute());
 
             // Navigator.pushReplacementNamed(context, '/dashboard');
+            Navigator.pushNamed(context, '/dashboard');
+
           },
           child: Icon(
             Icons.dashboard,
@@ -466,7 +477,19 @@ class _DashboardRoutingState extends State<DashboardRouting> {
         floatingActionButton: FloatingActionButton(
             onPressed: (){
               print("Dashboard Floating Button");
-              Navigator.pushReplacementNamed(context, '/login');
+              // Navigator.pushReplacementNamed(context, '/login');
+              // Navigator.pushNamedAndRemoveUntil(context,
+              //     '/login',
+              //     ModalRoute.withName('/loading')
+              // );//[Loading,Login]
+              // Navigator.pushNamedAndRemoveUntil(context,
+              //     '/login',
+              //     (Routes) => false
+              // );//[Loading,Login]
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/loading')
+              );//[Loading]
+
             },
         child: Icon(
           Icons.login,
