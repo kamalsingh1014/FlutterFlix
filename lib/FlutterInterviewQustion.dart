@@ -50,7 +50,24 @@ class FlutterInterviewQuestions{
         answerId: 5, answer: ""
         "Navigator.push : It will  push a new route on  top of the navigation stack."
         "Navigator.pushReplacement : It replaced the current route with a new route"
-        "")
+        ""),
+    QuestionModel(terminologyId: 1,
+        terminology: "Flutter",
+        questionId: 6,
+        question: "What is Future and FutureBuilder?",
+        answerId:6 , answer: ""
+            "Future is a value that will be available in the future after some async operations completed"
+            "Future Builder is widget that waits for the future and builds UI based on it's states "
+            "like Loading , Completion , Error"
+            ""),
+    QuestionModel(terminologyId: 1,
+        terminology: "Flutter",
+        questionId: 7,
+        question: "How does setState() work?",
+        answerId: 7, answer: ""
+            "setState(){} is used to notify the flutter framework that the internal state of a widget has changed and "
+            "the widget needs to be rebuilt."
+            "")
   ];
 }
 

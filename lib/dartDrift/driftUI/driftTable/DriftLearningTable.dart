@@ -4,7 +4,7 @@ import 'package:drift/drift.dart';
 
 class DriftLearningTable extends Table{
 
-  IntColumn get terminologyId => integer().named("terminologyId")();
+  IntColumn get terminologyId => integer().named("terminologyId").autoIncrement()();
   TextColumn get terminology => text().named("terminology")();
   IntColumn get questionId => integer().named("questionId")();
   TextColumn get question => text().named("question")();

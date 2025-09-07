@@ -16,7 +16,6 @@ class _DartCustomClassWidgetState extends State<DartCustomClassWidget> {
     ProfileCustomClass(name: "Jitin Tyagi", age: "31"),
     ProfileCustomClass(name: "Prem Sarkar", age: "28"),
     ProfileCustomClass(name: "Monu Ansari", age: "29"),
-    ProfileCustomClass(name: "Ranu Thakur", age: "30"),
 
   ];
 
@@ -25,13 +24,7 @@ class _DartCustomClassWidgetState extends State<DartCustomClassWidget> {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Learn Custom Classes"),
-          centerTitle: true,
-          backgroundColor: Colors.green,
-        ),
         body: Column(
-
           children: profileList.map((it){
             return
               Container(
